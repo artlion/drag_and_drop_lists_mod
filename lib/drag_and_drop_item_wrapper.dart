@@ -1,20 +1,18 @@
-import 'package:drag_and_drop_lists/drag_and_drop_lists.dart';
-import 'package:drag_and_drop_lists/measure_size.dart';
+import 'drag_and_drop_lists.dart';
+import 'measure_size.dart';
 import 'package:flutter/material.dart';
 
 class DragAndDropItemWrapper extends StatefulWidget {
   final DragAndDropItem child;
   final DragAndDropBuilderParameters? parameters;
 
-  const DragAndDropItemWrapper(
-      {required this.child, required this.parameters, super.key});
+  const DragAndDropItemWrapper({required this.child, required this.parameters, super.key});
 
   @override
   State<StatefulWidget> createState() => _DragAndDropItemWrapper();
 }
 
-class _DragAndDropItemWrapper extends State<DragAndDropItemWrapper>
-    with TickerProviderStateMixin {
+class _DragAndDropItemWrapper extends State<DragAndDropItemWrapper> with TickerProviderStateMixin {
   DragAndDropItem? _hoveredDraggable;
 
   bool _dragging = false;
@@ -115,20 +113,20 @@ class _DragAndDropItemWrapper extends State<DragAndDropItemWrapper>
           onSizeChange: _setContainerSize,
           child: LongPressDraggable<DragAndDropItem>(
             data: widget.child,
-            axis: widget.parameters!.axis == Axis.vertical &&
-                    widget.parameters!.constrainDraggingAxis
-                ? Axis.vertical
-                : null,
+            axis:
+                widget.parameters!.axis == Axis.vertical && widget.parameters!.constrainDraggingAxis
+                    ? Axis.vertical
+                    : null,
             feedback: SizedBox(
-              width:
-                  widget.parameters!.itemDraggingWidth ?? _containerSize.width,
+              width: widget.parameters!.itemDraggingWidth ?? _containerSize.width,
               child: Material(
                 color: Colors.transparent,
                 child: Container(
                   decoration: widget.parameters!.itemDecorationWhileDragging,
                   child: Directionality(
-                      textDirection: Directionality.of(context),
-                      child: widget.child.feedbackWidget ?? widget.child.child),
+                    textDirection: Directionality.of(context),
+                    child: widget.child.feedbackWidget ?? widget.child.child,
+                  ),
                 ),
               ),
             ),
@@ -145,13 +143,12 @@ class _DragAndDropItemWrapper extends State<DragAndDropItemWrapper>
           onSizeChange: _setContainerSize,
           child: Draggable<DragAndDropItem>(
             data: widget.child,
-            axis: widget.parameters!.axis == Axis.vertical &&
-                    widget.parameters!.constrainDraggingAxis
-                ? Axis.vertical
-                : null,
+            axis:
+                widget.parameters!.axis == Axis.vertical && widget.parameters!.constrainDraggingAxis
+                    ? Axis.vertical
+                    : null,
             feedback: SizedBox(
-              width:
-                  widget.parameters!.itemDraggingWidth ?? _containerSize.width,
+              width: widget.parameters!.itemDraggingWidth ?? _containerSize.width,
               child: Material(
                 color: Colors.transparent,
                 child: Container(
@@ -174,8 +171,7 @@ class _DragAndDropItemWrapper extends State<DragAndDropItemWrapper>
       }
     } else {
       draggable = AnimatedSize(
-        duration: Duration(
-            milliseconds: widget.parameters!.itemSizeAnimationDuration),
+        duration: Duration(milliseconds: widget.parameters!.itemSizeAnimationDuration),
         alignment: Alignment.bottomCenter,
         child: _hoveredDraggable != null ? Container() : widget.child.child,
       );
@@ -187,14 +183,12 @@ class _DragAndDropItemWrapper extends State<DragAndDropItemWrapper>
           crossAxisAlignment: widget.parameters!.verticalAlignment,
           children: <Widget>[
             AnimatedSize(
-              duration: Duration(
-                  milliseconds: widget.parameters!.itemSizeAnimationDuration),
+              duration: Duration(milliseconds: widget.parameters!.itemSizeAnimationDuration),
               alignment: Alignment.topLeft,
               child: _hoveredDraggable != null
                   ? Opacity(
                       opacity: widget.parameters!.itemGhostOpacity,
-                      child: widget.parameters!.itemGhost ??
-                          _hoveredDraggable!.child,
+                      child: widget.parameters!.itemGhost ?? _hoveredDraggable!.child,
                     )
                   : Container(),
             ),
@@ -215,8 +209,7 @@ class _DragAndDropItemWrapper extends State<DragAndDropItemWrapper>
             onWillAcceptWithDetails: (details) {
               bool accept = true;
               if (widget.parameters!.itemOnWillAccept != null) {
-                accept = widget.parameters!.itemOnWillAccept!(
-                    details.data, widget.child);
+                accept = widget.parameters!.itemOnWillAccept!(details.data, widget.child);
               }
               if (accept && mounted) {
                 setState(() {
@@ -243,7 +236,7 @@ class _DragAndDropItemWrapper extends State<DragAndDropItemWrapper>
               }
             },
           ),
-        )
+        ),
       ],
     );
   }

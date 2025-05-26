@@ -1,6 +1,6 @@
-import 'package:drag_and_drop_lists/drag_and_drop_builder_parameters.dart';
-import 'package:drag_and_drop_lists/drag_and_drop_interface.dart';
-import 'package:drag_and_drop_lists/drag_and_drop_item.dart';
+import 'drag_and_drop_builder_parameters.dart';
+import 'drag_and_drop_interface.dart';
+import 'drag_and_drop_item.dart';
 import 'package:flutter/material.dart';
 
 abstract class DragAndDropListInterface implements DragAndDropInterface {
@@ -14,18 +14,17 @@ abstract class DragAndDropListInterface implements DragAndDropInterface {
   Widget generateWidget(DragAndDropBuilderParameters params);
 }
 
-abstract class DragAndDropListExpansionInterface
-    implements DragAndDropListInterface {
+abstract class DragAndDropListExpansionInterface implements DragAndDropListInterface {
   @override
   final List<DragAndDropItem>? children;
 
   DragAndDropListExpansionInterface({this.children});
 
-  get isExpanded;
+  dynamic get isExpanded;
 
-  toggleExpanded();
+  dynamic toggleExpanded();
 
-  expand();
+  dynamic expand();
 
-  collapse();
+  dynamic collapse();
 }

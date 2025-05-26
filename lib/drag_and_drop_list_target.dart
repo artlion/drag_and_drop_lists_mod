@@ -1,5 +1,5 @@
-import 'package:drag_and_drop_lists/drag_and_drop_builder_parameters.dart';
-import 'package:drag_and_drop_lists/drag_and_drop_list_interface.dart';
+import 'drag_and_drop_builder_parameters.dart';
+import 'drag_and_drop_list_interface.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -14,19 +14,19 @@ class DragAndDropListTarget extends StatefulWidget {
   final OnDropOnLastTarget onDropOnLastTarget;
   final double lastListTargetSize;
 
-  const DragAndDropListTarget(
-      {this.child,
-      required this.parameters,
-      required this.onDropOnLastTarget,
-      this.lastListTargetSize = 110,
-      super.key});
+  const DragAndDropListTarget({
+    required this.parameters,
+    required this.onDropOnLastTarget,
+    this.child,
+    this.lastListTargetSize = 110,
+    super.key,
+  });
 
   @override
   State<StatefulWidget> createState() => _DragAndDropListTarget();
 }
 
-class _DragAndDropListTarget extends State<DragAndDropListTarget>
-    with TickerProviderStateMixin {
+class _DragAndDropListTarget extends State<DragAndDropListTarget> with TickerProviderStateMixin {
   DragAndDropListInterface? _hoveredDraggable;
 
   @override
@@ -34,8 +34,7 @@ class _DragAndDropListTarget extends State<DragAndDropListTarget>
     Widget visibleContents = Column(
       children: <Widget>[
         AnimatedSize(
-          duration: Duration(
-              milliseconds: widget.parameters.listSizeAnimationDuration),
+          duration: Duration(milliseconds: widget.parameters.listSizeAnimationDuration),
           alignment: widget.parameters.axis == Axis.vertical
               ? Alignment.bottomCenter
               : Alignment.centerLeft,
@@ -49,12 +48,8 @@ class _DragAndDropListTarget extends State<DragAndDropListTarget>
         ),
         widget.child ??
             SizedBox(
-              height: widget.parameters.axis == Axis.vertical
-                  ? widget.lastListTargetSize
-                  : null,
-              width: widget.parameters.axis == Axis.horizontal
-                  ? widget.lastListTargetSize
-                  : null,
+              height: widget.parameters.axis == Axis.vertical ? widget.lastListTargetSize : null,
+              width: widget.parameters.axis == Axis.horizontal ? widget.lastListTargetSize : null,
             ),
       ],
     );
@@ -82,8 +77,7 @@ class _DragAndDropListTarget extends State<DragAndDropListTarget>
             onWillAcceptWithDetails: (details) {
               bool accept = true;
               if (widget.parameters.listTargetOnWillAccept != null) {
-                accept =
-                    widget.parameters.listTargetOnWillAccept!(details.data, widget);
+                accept = widget.parameters.listTargetOnWillAccept!(details.data, widget);
               }
               if (accept && mounted) {
                 setState(() {
