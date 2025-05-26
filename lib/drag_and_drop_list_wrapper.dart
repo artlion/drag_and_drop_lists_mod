@@ -253,11 +253,14 @@ class _DragAndDropListWrapper extends State<DragAndDropListWrapper> with TickerP
         width: widget.parameters.axis == Axis.vertical
             ? (widget.parameters.listDraggingWidth ?? MediaQuery.of(context).size.width)
             : (widget.parameters.listDraggingWidth ?? widget.parameters.listWidth),
-        child: Material(
-          color: Colors.transparent,
-          child: Directionality(
-            textDirection: Directionality.of(context),
-            child: header ?? const SizedBox(),
+        child: MouseRegion(
+          cursor: SystemMouseCursors.grab,
+          child: Material(
+            color: Colors.transparent,
+            child: Directionality(
+              textDirection: Directionality.of(context),
+              child: header ?? const SizedBox(),
+            ),
           ),
         ),
       );
