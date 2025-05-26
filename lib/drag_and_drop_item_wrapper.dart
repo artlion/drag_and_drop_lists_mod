@@ -103,7 +103,6 @@ class _DragAndDropItemWrapper extends State<DragAndDropItemWrapper> with TickerP
                 visible: !_dragging,
                 child: widget.child.child,
               ),
-              // dragAndDropListContents,
               positionedDragHandle,
             ],
           ),
@@ -155,7 +154,9 @@ class _DragAndDropItemWrapper extends State<DragAndDropItemWrapper> with TickerP
                   decoration: widget.parameters!.itemDecorationWhileDragging,
                   child: Directionality(
                     textDirection: Directionality.of(context),
-                    child: widget.child.feedbackWidget ?? widget.child.child,
+                    child: MouseRegion(
+                        cursor: SystemMouseCursors.grab,
+                        child: widget.child.feedbackWidget ?? widget.child.child),
                   ),
                 ),
               ),
