@@ -60,6 +60,7 @@ class _DragAndDropItemWrapper extends State<DragAndDropItemWrapper> with TickerP
           child: MouseRegion(
             cursor: SystemMouseCursors.grab,
             child: Draggable<DragAndDropItem>(
+              ignoringFeedbackPointer: false, //HERE CHANGE
               data: widget.child,
               axis: widget.parameters!.axis == Axis.vertical &&
                       widget.parameters!.constrainDraggingAxis
